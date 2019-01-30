@@ -19,16 +19,23 @@ function parseSites(site) {
 }
 
 async function whois({ host }) {
-  const domain = host.split('.').slice(-2).join('.')
-  const data = await lookup(domain)
-  return { type: 'whois', data }
+  try {
+    const domain = host.split('.').slice(-2).join('.')
+    const data = await lookup(domain)
+    return { type: 'whois', data: { host, domain, ...data } }
+  } catch (e) {
+    return { type: 'whois', data: { host, domain, error: e.stack } }
+  }
 }
 
 async function dns({ host }) {
   return Promise.all([
-    resolve4(host, { ttl: true }).then(data => ({ type: 'dns', data: { host, data } }), e => ({ type: 'dns', data: { host, error: e.stack } })),
-    resolve6(host, { ttl: true }).then(data => ({ type: 'dns', data: { host, data } }), e => ({ type: 'dns', data: { host, error: e.stack } })),
-    resolveMx(host, { ttl: true }).then(data => ({ type: 'dns', data: { host, data } }), e => ({ type: 'dns', data: { host, error: e.stack } }))
+    resolve4(host, { ttl: true }).then(data => ({ type: 'dns', data: { host, data } }),
+      e => ({ type: 'dns', data: { host, error: e.stack } })),
+    resolve6(host, { ttl: true }).then(data => ({ type: 'dns', data: { host, data } }),
+      e => ({ type: 'dns', data: { host, error: e.stack } })),
+    resolveMx(host, { ttl: true }).then(data => ({ type: 'dns', data: { host, data } }),
+      e => ({ type: 'dns', data: { host, error: e.stack } }))
   ])
 }
 
