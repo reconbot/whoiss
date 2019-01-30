@@ -1,0 +1,25 @@
+{
+  "name": "whoiss",
+  "version": "1.0.0",
+  "description": "whois for sites",
+  "bin": "whoiss.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reconbot/whoiss.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reconbot/whoiss/issues"
+  },
+  "homepage": "https://github.com/reconbot/whoiss#readme",
+  "dependencies": {
+    "streaming-iterables": "^3.4.0",
+    "whois": "^2.9.1",
+    "whois-parsed": "^1.0.6"
+  }
+}
