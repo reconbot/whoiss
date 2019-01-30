@@ -1,6 +1,6 @@
 {
   "name": "whoiss",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "whois for sites",
   "bin": "whoiss.js",
   "scripts": {
